@@ -23,6 +23,24 @@ class Post extends Model
 
     public function media()
     {
-        return $this->hasOne(Media::class, 'post_id');
+        return $this->hasMany(Media::class, 'post_id');
     }
+    public function reactions()
+{
+    return $this->hasMany(Faire::class, 'post_id');
+}
+public function getPostDetails()
+    {
+        $media = $this->media;
+        $reactionsCount = $this->reactions()->count();
+        $commentsCount = $this->comments()->count();
+
+        return [
+            'description' => $this->post_content,
+            'media_url' => $media ? $media->media_url : null,
+            'reactions_count' => $reactionsCount,
+            'comments_count' => $commentsCount,
+        ];
+    }
+
 }
