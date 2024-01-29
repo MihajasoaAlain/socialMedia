@@ -15,7 +15,7 @@ class CreateReactionsTable extends Migration
     {
         Schema::create('reactions', function (Blueprint $table) {
             $table->id();
-            $table->string('reaction_id',50);
+            $table->string('reaction_id',50)->default(uniqid());
             $table->string('reaction_type',50);
             $table->timestamps();
         });

@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Str;
 class CreateMessagesTable extends Migration
 {
     /**
@@ -15,12 +15,12 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('message_id',50)->unique();
+            $table->string('message_id',50)->unique()->default(Str::uuid());
             $table->text('message_content');
             $table->date('message_date');
             $table->string('user_id',250);
             $table->foreign('user_id')->references('user_id')->on('users');
-            $table->string('conversation_id',250);
+            $table->string('conversation_id',50);
             $table->foreign('conversation_id')->references('conversation_id')->on('conversations');
             $table->timestamps();
         });

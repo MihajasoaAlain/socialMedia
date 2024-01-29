@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class CreateCommentsTable extends Migration
 {
@@ -15,7 +16,7 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('comment_id',50)->unique();
+            $table->string('comment_id',50)->unique()->default(Str::uuid());
             $table->text('comment_content');
             $table->date('comment_date');
             $table->string('post_id',50);

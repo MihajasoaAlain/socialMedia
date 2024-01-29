@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Str;
 class CreateConversationsTable extends Migration
 {
     /**
@@ -15,7 +15,7 @@ class CreateConversationsTable extends Migration
     {
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
-            $table->string('conversation_id',50);
+            $table->string('conversation_id', 50)->unique()->default(Str::uuid());
             $table->string('conversation_name',50);
             $table->timestamps();
         });
